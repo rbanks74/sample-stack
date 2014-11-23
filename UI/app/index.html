@@ -1,0 +1,28 @@
+<!Doctype html>
+	<head>
+		<script src="angular.min.js"></script>
+		<script src="formCtrl.js"></script>
+	</head>
+	<body ng-app="myApp">
+		<form name="myForm" ng-controller="formCtrl">
+
+			<div class="number">
+				<label>Phone Number</label>
+				<input type="text" name="phone" ng-maxlength="{{user.limit}}" ng-model="user.phoneNumber" ng-pattern="/^\+?\d{3}[- ]?\d{3}[- ]?\d{4}$/" required />
+				<span ng-show="myForm.phone.$error.maxlength">Too long!</span>
+				<span ng-show="myForm.phone.$error.required && myForm.phone.$dirty">Format is incorrect: Required -> ###-###-####</span>
+			</div>
+
+			<div class="radio">
+				<label>Grocery List</label>
+				<div ng-repeat="item in user.items">
+					<input type="radio" name="list" value="{{item}}" />{{item}}
+				</div>
+			</div>
+
+			<button ng-disabled="myForm.$invalid">Submit!</button>
+
+		</form>
+	</body>
+
+</html>
